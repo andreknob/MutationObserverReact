@@ -17,6 +17,12 @@ function App() {
       mutations.forEach(function (mutation) {
         console.log("mutation:");
         console.log(mutation);
+
+        if (mutation.type === "childList") {
+          console.log("A child node has been added or removed.");
+        } else if (mutation.type === "attributes") {
+          console.log(`The ${mutation.attributeName} attribute was modified.`);
+        }
       });
     });
 
@@ -28,12 +34,16 @@ function App() {
     return () => mutationObserver.disconnect();
   }, []);
 
-  const handleChange = () => setShowText((value) => !value);
+  const handleChange = () => {
+    setShowText((value) => !value);
+  };
 
   return (
     <div>
       <input type="button" value="button" onClick={handleChange}></input>
-      <div style={{ marginTop: "64px" }}>{showText ? "react test" : false}</div>
+      <div style={{ marginTop: showText ? "64px" : "0px" }}>
+        {showText ? "react test" : false}
+      </div>
     </div>
   );
 }

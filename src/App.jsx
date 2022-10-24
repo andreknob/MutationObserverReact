@@ -28,13 +28,11 @@ function App() {
     return () => mutationObserver.disconnect();
   }, []);
 
+  const handleChange = () => setShowText((value) => !value);
+
   return (
     <div>
-      <input
-        type="button"
-        value="button"
-        onClick={() => setShowText(true)}
-      ></input>
+      <input type="button" value="button" onClick={handleChange}></input>
       <div style={{ marginTop: "64px" }}>{showText ? "react test" : false}</div>
     </div>
   );
